@@ -1,7 +1,6 @@
-import Board from "./classes/Board";
-
+import GameManager from "./classes/GameManager";
+import "./events/inputs";
 export const play = () => {
-  requestAnimationFrame(play);
-  const board = new Board();
-  board.init();
+  GameManager.Instance?.init();
+  GameManager.Instance?.update();
 };

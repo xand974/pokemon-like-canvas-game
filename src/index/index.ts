@@ -1,6 +1,6 @@
 import { play } from "../scripts/Game";
 
-async function main() {
+function main() {
   play();
 }
 

@@ -1,12 +1,23 @@
-export const playerInfos = {};
+export const playerInfos = {
+  src: "../assets/images/playerDown.png",
+  sprites: {
+    up: "../assets/images/playerUp.png",
+    down: "../assets/images/playerDown.png",
+    left: "../assets/images/playerLeft.png",
+    right: "../assets/images/playerRight.png",
+  },
+  frames: {
+    max: 4,
+  },
+  name: "NOUVEAU PLAYER",
+};
 export const boardInfos = {
-  src: "../assets/images/Map.png",
+  src: "../assets/images/PokemonGameMap.png",
   position: {
-    x: 0,
-    y: 0,
+    x: -1800,
+    y: -100,
   },
   frames: {
     max: 1,
-    val: 1,
   },
 };
