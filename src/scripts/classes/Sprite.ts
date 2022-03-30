@@ -1,3 +1,4 @@
+import { ctx } from "./Canvas";
 import Canvas from "./GameManager";
 export default class Sprite {
   public width: number;
@@ -36,7 +37,7 @@ export default class Sprite {
     let cropStartX: number = 0;
     if (this.frames.val) cropStartX = this.frames.val * this.width;
     let maxFps = 10;
-    Canvas.Context.drawImage(
+    ctx.drawImage(
       this.image,
       cropStartX,
       0, //start crop x, y

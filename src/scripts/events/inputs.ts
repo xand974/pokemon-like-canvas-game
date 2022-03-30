@@ -1,5 +1,5 @@
 import GameManager from "../classes/GameManager";
-import Player from "../classes/Player";
+import { board } from "../classes/Instance";
 import { playerInfos } from "../objects";
 const inputs = {
   up: {
@@ -29,17 +29,16 @@ const getAxis = (key: string) => {
 const movePlayer = (e: any) => {
   switch (e.key) {
     case inputs.up.key:
-      GameManager.Board.position.y += 7;
-      console.log(Player.Instance);
+      board.position.y += 7;
       break;
     case inputs.down.key:
-      GameManager.Board.position.y -= 7;
+      board.position.y -= 7;
       break;
     case inputs.left.key:
-      GameManager.Board.position.x += 7;
+      board.position.x += 7;
       break;
     case inputs.right.key:
-      GameManager.Board.position.x -= 7;
+      board.position.x -= 7;
       break;
   }
 };
