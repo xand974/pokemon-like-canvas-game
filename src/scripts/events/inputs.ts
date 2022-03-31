@@ -1,6 +1,4 @@
-import GameManager from "../classes/GameManager";
-import { board } from "../classes/Instance";
-import { playerInfos } from "../objects";
+import { board, player } from "../classes/Instance";
 const inputs = {
   up: {
     key: "z",
@@ -15,31 +13,57 @@ const inputs = {
     key: "d",
   },
 };
-const getAxis = (key: string) => {
-  switch (key) {
+const getAxis = (e: KeyboardEvent) => {
+  const direction = { x: 0, y: 0 };
+  let speed = 10;
+  switch (e.key) {
     case inputs.up.key:
-    case inputs.right.key:
-      return 1;
+      return { ...direction, y: speed };
     case inputs.down.key:
+      return { ...direction, y: -speed };
+    case inputs.right.key:
+      return { ...direction, x: -speed };
     case inputs.left.key:
-      return -1;
+      return { ...direction, x: speed };
+    default:
+      return { x: 0, y: 0 };
   }
 };
 
-const movePlayer = (e: any) => {
+const setMoving = (e: KeyboardEvent) => {
   switch (e.key) {
     case inputs.up.key:
-      board.position.y += 7;
+      player.image.src = player.sprites.up;
+      player.moving = true;
       break;
     case inputs.down.key:
-      board.position.y -= 7;
-      break;
-    case inputs.left.key:
-      board.position.x += 7;
+      player.image.src = player.sprites.down;
+      player.moving = true;
       break;
     case inputs.right.key:
-      board.position.x -= 7;
+      player.image.src = player.sprites.right;
+      player.moving = true;
+      break;
+    case inputs.left.key:
+      player.image.src = player.sprites.left;
+      player.moving = true;
+      break;
+    default:
+      player.moving = false;
       break;
   }
 };
+
+const movePlayer = (e: KeyboardEvent) => {
+  const movement = getAxis(e);
+  board.position.x += movement.x;
+  board.position.y += movement.y;
+  setMoving(e);
+};
+
+const stopPlayer = (e: KeyboardEvent) => {
+  player.moving = false;
+};
+
 window.addEventListener("keydown", movePlayer);
+window.addEventListener("keyup", stopPlayer);
