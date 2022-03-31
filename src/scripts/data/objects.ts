@@ -10,6 +10,7 @@ export const playerInfos = {
     max: 4,
   },
   name: "NOUVEAU PLAYER",
+  lvl: 1,
 };
 export const boardInfos = {
   src: "../assets/images/PokemonGameMap.png",

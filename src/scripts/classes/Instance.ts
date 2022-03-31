@@ -1,7 +1,7 @@
-import { boardInfos, playerInfos } from "../objects";
+import { boardInfos, playerInfos } from "../data/objects";
 import { canvas } from "./Canvas";
-import Player from "./Player";
-import Sprite from "./Sprite";
+import Player from "./Entity/Player";
+import Sprite from "./Base/Sprite";
 
 const offset = {
   x: canvas.width / 2,
@@ -9,4 +9,7 @@ const offset = {
 };
 
 export const board = new Sprite({ ...boardInfos });
-export const player = new Player({ ...playerInfos, position: { ...offset } });
+export const player = new Player({
+  ...playerInfos,
+  position: { ...offset },
+});

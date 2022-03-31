@@ -1,7 +1,8 @@
-import Sprite from "./Sprite";
+import Sprite from "./Base/Sprite";
 import { board, player } from "./Instance";
 export default class GameManager {
-  private renderedSprites: Sprite[] = [];
+  private movables: Sprite[] = [];
+
   public static Instance: GameManager = new GameManager();
 
   constructor() {}
@@ -13,10 +14,5 @@ export default class GameManager {
 
     board.draw();
     player.draw();
-
-    // this.renderedSprites = [board];
-    // for (const sprite of this.renderedSprites) {
-    //   if (sprite !== undefined) sprite.draw();
-    // }
   }
 }

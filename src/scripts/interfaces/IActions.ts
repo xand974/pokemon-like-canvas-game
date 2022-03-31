@@ -1,4 +1,4 @@
-import Sprite from "../classes/Sprite";
+import Sprite from "../classes/Base/Sprite";
 type ActionType = {
   attack: {
     name: string;
