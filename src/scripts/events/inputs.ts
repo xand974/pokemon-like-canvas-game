@@ -1,4 +1,4 @@
-import { board, player } from "../classes/Instance";
+import { movables, player } from "../Instance";
 const inputs = {
   up: {
     key: "z",
@@ -66,8 +66,10 @@ const setMoving = (e: KeyboardEvent) => {
 
 const movePlayer = (e: KeyboardEvent) => {
   const movement = getAxis(e);
-  board.position.x += movement.x;
-  board.position.y += movement.y;
+  for (const movable of movables) {
+    movable.position.x += movement.x;
+    movable.position.y += movement.y;
+  }
   setMoving(e);
   handleInput(e, () => {
     player.moving = true;
