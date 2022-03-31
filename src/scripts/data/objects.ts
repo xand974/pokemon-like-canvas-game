@@ -12,11 +12,14 @@ export const playerInfos = {
   name: "NOUVEAU PLAYER",
   lvl: 1,
 };
+export const offsetMap = {
+  x: -1800,
+  y: -100,
+};
 export const boardInfos = {
   src: "../assets/images/PokemonGameMap.png",
   position: {
-    x: -1800,
-    y: -100,
+    ...offsetMap,
   },
   frames: {
     max: 1,
