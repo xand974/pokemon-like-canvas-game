@@ -27,17 +27,18 @@ const handleInput = (e: KeyboardEvent, callback: () => void) => {
   }
 };
 
+let lastKey = "";
 const getAxis = (e: KeyboardEvent) => {
   const direction = { x: 0, y: 0 };
   let speed = 10;
-  switch (e.key) {
-    case inputs.up.key:
+  switch (true) {
+    case e.key === inputs.up.key && lastKey === "z":
       return { ...direction, y: speed };
-    case inputs.down.key:
+    case e.key === inputs.down.key && lastKey === "s":
       return { ...direction, y: -speed };
-    case inputs.right.key:
+    case e.key === inputs.right.key && lastKey === "d":
       return { ...direction, x: -speed };
-    case inputs.left.key:
+    case e.key === inputs.left.key && lastKey === "q":
       return { ...direction, x: speed };
     default:
       return { x: 0, y: 0 };
@@ -47,15 +48,19 @@ const getAxis = (e: KeyboardEvent) => {
 const setMoving = (e: KeyboardEvent) => {
   switch (e.key) {
     case inputs.up.key:
+      lastKey = "z";
       player.image.src = player.sprites.up;
       break;
     case inputs.down.key:
+      lastKey = "s";
       player.image.src = player.sprites.down;
       break;
     case inputs.right.key:
+      lastKey = "d";
       player.image.src = player.sprites.right;
       break;
     case inputs.left.key:
+      lastKey = "q";
       player.image.src = player.sprites.left;
       break;
     default:
@@ -65,13 +70,14 @@ const setMoving = (e: KeyboardEvent) => {
 };
 
 const movePlayer = (e: KeyboardEvent) => {
-  const movement = getAxis(e);
-  board.position.x += movement.x;
-  board.position.y += movement.y;
   setMoving(e);
   handleInput(e, () => {
     player.moving = true;
   });
+  const movement = getAxis(e);
+
+  board.position.x += movement.x;
+  board.position.y += movement.y;
 };
 
 const stopPlayer = (e: KeyboardEvent) => {
