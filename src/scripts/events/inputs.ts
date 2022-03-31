@@ -13,6 +13,20 @@ const inputs = {
     key: "d",
   },
 };
+
+const handleInput = (e: KeyboardEvent, callback: () => void) => {
+  switch (e.key) {
+    case inputs.up.key:
+    case inputs.down.key:
+    case inputs.right.key:
+    case inputs.left.key:
+      callback();
+      break;
+    default:
+      return;
+  }
+};
+
 const getAxis = (e: KeyboardEvent) => {
   const direction = { x: 0, y: 0 };
   let speed = 10;
@@ -34,19 +48,15 @@ const setMoving = (e: KeyboardEvent) => {
   switch (e.key) {
     case inputs.up.key:
       player.image.src = player.sprites.up;
-      player.moving = true;
       break;
     case inputs.down.key:
       player.image.src = player.sprites.down;
-      player.moving = true;
       break;
     case inputs.right.key:
       player.image.src = player.sprites.right;
-      player.moving = true;
       break;
     case inputs.left.key:
       player.image.src = player.sprites.left;
-      player.moving = true;
       break;
     default:
       player.moving = false;
@@ -59,6 +69,9 @@ const movePlayer = (e: KeyboardEvent) => {
   board.position.x += movement.x;
   board.position.y += movement.y;
   setMoving(e);
+  handleInput(e, () => {
+    player.moving = true;
+  });
 };
 
 const stopPlayer = (e: KeyboardEvent) => {
