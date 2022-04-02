@@ -1,83 +1,176 @@
-import { movables, player } from "../Instance";
+import { movables, player, testBoundary } from "../Instance";
+import Boundary from "../classes/Boundary";
+import { BoundaryType } from "../types";
+import Sprite from "../classes/Base/Sprite";
+
+//#region variables
+let lastKey = "";
 const inputs = {
-  up: {
-    key: "z",
+  z: {
+    pressed: false,
   },
-  left: {
-    key: "q",
+  q: {
+    pressed: false,
   },
-  down: {
-    key: "s",
+  s: {
+    pressed: false,
   },
-  right: {
-    key: "d",
+  d: {
+    pressed: false,
   },
 };
-
-const handleInput = (e: KeyboardEvent, callback: () => void) => {
+//#endregion
+//#region inputs
+const setInputs = (e: KeyboardEvent) => {
   switch (e.key) {
-    case inputs.up.key:
-    case inputs.down.key:
-    case inputs.right.key:
-    case inputs.left.key:
-      callback();
-      break;
-    default:
-      return;
-  }
-};
-
-const getAxis = (e: KeyboardEvent) => {
-  const direction = { x: 0, y: 0 };
-  let speed = 10;
-  switch (e.key) {
-    case inputs.up.key:
-      return { ...direction, y: speed };
-    case inputs.down.key:
-      return { ...direction, y: -speed };
-    case inputs.right.key:
-      return { ...direction, x: -speed };
-    case inputs.left.key:
-      return { ...direction, x: speed };
-    default:
-      return { x: 0, y: 0 };
-  }
-};
-
-const setMoving = (e: KeyboardEvent) => {
-  switch (e.key) {
-    case inputs.up.key:
+    case "z":
       player.image.src = player.sprites.up;
+      inputs.z.pressed = true;
+      lastKey = "z";
       break;
-    case inputs.down.key:
+    case "s":
       player.image.src = player.sprites.down;
+      inputs.s.pressed = true;
+      lastKey = "s";
       break;
-    case inputs.right.key:
+    case "d":
       player.image.src = player.sprites.right;
+      inputs.d.pressed = true;
+      lastKey = "d";
       break;
-    case inputs.left.key:
+    case "q":
       player.image.src = player.sprites.left;
-      break;
-    default:
-      player.moving = false;
+      inputs.q.pressed = true;
+      lastKey = "q";
       break;
   }
 };
 
-const movePlayer = (e: KeyboardEvent) => {
-  const movement = getAxis(e);
-  for (const movable of movables) {
-    movable.position.x += movement.x;
-    movable.position.y += movement.y;
+export const setMoving = () => {
+  let moving = true;
+  const speed = 10;
+  if (inputs.z.pressed && lastKey === "z") {
+    if (
+      isColliding({
+        rectangle1: player,
+        rectangle2: {
+          ...testBoundary,
+          position: {
+            x: testBoundary.position.x,
+            y: testBoundary.position.y + 10,
+          },
+        },
+      })
+    ) {
+      moving = false;
+    }
+    if (moving)
+      for (const movable of movables) {
+        movable.position.y += speed;
+      }
   }
-  setMoving(e);
-  handleInput(e, () => {
-    player.moving = true;
-  });
+  if (inputs.q.pressed && lastKey === "q") {
+    if (
+      isColliding({
+        rectangle1: player,
+        rectangle2: {
+          ...testBoundary,
+          position: {
+            x: testBoundary.position.x + 10,
+            y: testBoundary.position.y,
+          },
+        },
+      })
+    ) {
+      moving = false;
+    }
+    if (moving)
+      for (const movable of movables) {
+        movable.position.x += speed;
+      }
+  }
+  if (inputs.s.pressed && lastKey === "s") {
+    if (
+      isColliding({
+        rectangle1: player,
+        rectangle2: {
+          ...testBoundary,
+          position: {
+            x: testBoundary.position.x,
+            y: testBoundary.position.y - 10,
+          },
+        },
+      })
+    ) {
+      moving = false;
+    }
+    if (moving)
+      for (const movable of movables) {
+        movable.position.y -= speed;
+      }
+  }
+  if (inputs.d.pressed && lastKey === "d") {
+    if (
+      isColliding({
+        rectangle1: player,
+        rectangle2: {
+          ...testBoundary,
+          position: {
+            x: testBoundary.position.x - speed,
+            y: testBoundary.position.y,
+          },
+        },
+      })
+    ) {
+      moving = false;
+    }
+    if (moving)
+      for (const movable of movables) {
+        movable.position.x -= speed;
+      }
+  }
 };
 
 const stopPlayer = (e: KeyboardEvent) => {
-  player.moving = false;
+  switch (e.key) {
+    case "z":
+      inputs.z.pressed = false;
+      break;
+    case "s":
+      inputs.s.pressed = false;
+      break;
+    case "d":
+      inputs.d.pressed = false;
+      break;
+    case "q":
+      inputs.q.pressed = false;
+      break;
+  }
+};
+//#endregion
+const isColliding = ({
+  rectangle1,
+  rectangle2,
+}: {
+  rectangle1: Sprite;
+  rectangle2: Partial<BoundaryType>;
+}) => {
+  if (!rectangle2.position) return;
+  const checkLeftToRight =
+    rectangle1.position.x + rectangle1.width >= rectangle2.position.x &&
+    rectangle1.position.x <= rectangle2.position.x + Boundary.Width;
+  const checkBottomToTop =
+    rectangle1.position.y + rectangle1.height >= rectangle2.position.y &&
+    rectangle1.position.y <= rectangle2.position.y + Boundary.Height;
+
+  return checkLeftToRight && checkBottomToTop;
+};
+
+const movePlayer = (e: KeyboardEvent) => {
+  setInputs(e);
+  setMoving();
+
+  stopPlayer(e);
 };
 
 window.addEventListener("keydown", movePlayer);
