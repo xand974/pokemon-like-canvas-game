@@ -1,6 +1,7 @@
 import { movables, player, testBoundary } from "../Instance";
 import { isColliding } from "../../utils/collision";
 
+// TODO Faudra Refactor
 export default class InputHandler {
   public lastKey: string;
   public inputs = {
@@ -22,6 +23,7 @@ export default class InputHandler {
     window.addEventListener("keydown", this.movePlayer.bind(this));
 
     window.addEventListener("keyup", (e) => {
+      player.moving = false;
       this.stopPlayer(e);
     });
   }
@@ -58,7 +60,9 @@ export default class InputHandler {
   setMoving() {
     let moving = true;
     const speed = 10;
+    player.moving = false;
     if (this.inputs.z.pressed && this.lastKey === "z") {
+      player.moving = true;
       if (
         isColliding({
           rectangle1: player,
@@ -71,6 +75,7 @@ export default class InputHandler {
           },
         })
       ) {
+        player.moving = false;
         moving = false;
       }
       if (moving)
@@ -79,6 +84,7 @@ export default class InputHandler {
         }
     }
     if (this.inputs.q.pressed && this.lastKey === "q") {
+      player.moving = true;
       if (
         isColliding({
           rectangle1: player,
@@ -91,6 +97,7 @@ export default class InputHandler {
           },
         })
       ) {
+        player.moving = false;
         moving = false;
       }
       if (moving)
@@ -99,6 +106,7 @@ export default class InputHandler {
         }
     }
     if (this.inputs.s.pressed && this.lastKey === "s") {
+      player.moving = true;
       if (
         isColliding({
           rectangle1: player,
@@ -111,6 +119,7 @@ export default class InputHandler {
           },
         })
       ) {
+        player.moving = false;
         moving = false;
       }
       if (moving)
@@ -119,6 +128,7 @@ export default class InputHandler {
         }
     }
     if (this.inputs.d.pressed && this.lastKey === "d") {
+      player.moving = true;
       if (
         isColliding({
           rectangle1: player,
@@ -131,6 +141,7 @@ export default class InputHandler {
           },
         })
       ) {
+        player.moving = false;
         moving = false;
       }
       if (moving)
