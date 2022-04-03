@@ -1,4 +1,9 @@
-import { boardInfos, foregroundInfos, playerInfos } from "./data/objects";
+import {
+  boardInfos,
+  combatInfos,
+  foregroundInfos,
+  playerInfos,
+} from "./data/objects";
 import { canvas } from "./classes/Canvas";
 import Player from "./classes/Entity/Player";
 import Sprite from "./classes/Base/Sprite";
@@ -27,4 +32,16 @@ const boundaries: Boundary[] = toBoundaryArray(collisionsArray, 1025);
 
 const movables = [board, ...boundaries, foreground];
 
-export { movables, player, inputHandler, boundaries };
+const combatSprite = new Sprite({ ...combatInfos });
+const deck = document.querySelector("#deck") as HTMLDivElement;
+const sidebar = document.querySelector("#sidebar") as HTMLDivElement;
+const htmlCombatsElements = [deck, sidebar];
+
+export {
+  movables,
+  player,
+  inputHandler,
+  boundaries,
+  combatSprite,
+  htmlCombatsElements,
+};

@@ -34,3 +34,18 @@ export const foregroundInfos = {
     max: 1,
   },
 };
+export const sceneStates = {
+  Map: 0,
+  Combat: 1,
+};
+
+export const combatInfos = {
+  src: "../../assets/images/battleBackground.png",
+  position: {
+    x: 0,
+    y: 0,
+  },
+  frames: {
+    max: 1,
+  },
+};

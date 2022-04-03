@@ -1,5 +1,4 @@
-import GameManager from "./classes/GameManager";
-import "./events/inputs";
+import SceneManager from "./classes/Scene/SceneManager";
 export const play = () => {
-  GameManager.Instance?.play();
+  SceneManager.Instance.initScene();
 };

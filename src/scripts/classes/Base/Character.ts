@@ -2,7 +2,6 @@ import Sprite from "./Sprite";
 export default class Character extends Sprite {
   public name?: string;
   public health: number;
-  public mana: number;
   public lvl?: number;
   constructor({
     position,
@@ -20,10 +19,9 @@ export default class Character extends Sprite {
   }) {
     super({ src, position: position, frames: frames, sprites });
     this.health = 100;
-    this.mana = 100;
     this.lvl = lvl;
   }
   public presentation() {
-    return `name : ${this.name} , mana : ${this.mana} , level : ${this.lvl}`;
+    return `name : ${this.name}, level : ${this.lvl}, health : ${this.health}`;
   }
 }

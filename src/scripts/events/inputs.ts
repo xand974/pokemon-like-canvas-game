@@ -17,6 +17,9 @@ export default class InputHandler {
     d: {
       pressed: false,
     },
+    p: {
+      pressed: false,
+    },
   };
   constructor() {
     this.lastKey = "";
@@ -53,6 +56,11 @@ export default class InputHandler {
         player.image.src = player.sprites.left;
         this.inputs.q.pressed = true;
         this.lastKey = "q";
+        break;
+      case "p":
+        this.inputs.p.pressed = true;
+        this.lastKey = "p";
+        player.moving = false;
         break;
     }
   }
@@ -164,6 +172,10 @@ export default class InputHandler {
         for (const movable of movables) {
           movable.position.x -= speed;
         }
+    }
+    if (this.inputs.p.pressed && this.lastKey === "p") {
+      moving = false;
+      return;
     }
   }
   stopPlayer(e: KeyboardEvent) {
