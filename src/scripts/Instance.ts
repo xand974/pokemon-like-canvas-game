@@ -1,4 +1,4 @@
-import { boardInfos, playerInfos } from "./data/objects";
+import { boardInfos, foregroundInfos, playerInfos } from "./data/objects";
 import { canvas } from "./classes/Canvas";
 import Player from "./classes/Entity/Player";
 import Sprite from "./classes/Base/Sprite";
@@ -22,10 +22,9 @@ const collisionsArray: number[][] = toMultiDimensionArray(
   collisions,
   sizeOfMapInPixel
 );
+const foreground = new Sprite({ ...foregroundInfos });
 const boundaries: Boundary[] = toBoundaryArray(collisionsArray, 1025);
-const testBoundary = new Boundary({
-  position: { x: offset.x, y: offset.y - 100 },
-});
-const movables = [board, ...boundaries];
+
+const movables = [board, ...boundaries, foreground];
 
 export { movables, player, inputHandler, boundaries };

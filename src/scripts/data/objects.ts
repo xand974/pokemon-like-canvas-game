@@ -25,3 +25,12 @@ export const boardInfos = {
     max: 1,
   },
 };
+export const foregroundInfos = {
+  src: "../assets/images/Foreground.png",
+  position: {
+    ...offsetMap,
+  },
+  frames: {
+    max: 1,
+  },
+};
