@@ -1,4 +1,3 @@
-import Sprite from "./Base/Sprite";
 import { movables, player } from "../Instance";
 export default class GameManager {
   public static Instance: GameManager = new GameManager();

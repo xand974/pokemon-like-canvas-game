@@ -1,4 +1,5 @@
 import { ctx } from "./Canvas";
+
 export default class Boundary {
   public static Width: number = 66;
   public static Height: number = 66;
@@ -10,7 +11,7 @@ export default class Boundary {
     this.position = position;
   }
   draw() {
-    ctx.fillStyle = "rgba(255, 0 ,0, 0.4)";
+    ctx.fillStyle = "rgba(255, 0 ,0, 0.9)";
     ctx.fillRect(
       this.position.x,
       this.position.y,
