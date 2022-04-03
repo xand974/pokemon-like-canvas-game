@@ -1,4 +1,4 @@
-import { movables, player, testBoundary } from "../Instance";
+import { boundaries, movables, player } from "../Instance";
 import { isColliding } from "../../utils/collision";
 
 // TODO Faudra Refactor
@@ -63,20 +63,24 @@ export default class InputHandler {
     player.moving = false;
     if (this.inputs.z.pressed && this.lastKey === "z") {
       player.moving = true;
-      if (
-        isColliding({
-          rectangle1: player,
-          rectangle2: {
-            ...testBoundary,
-            position: {
-              x: testBoundary.position.x,
-              y: testBoundary.position.y + 10,
+      for (let i = 0; i < boundaries.length; i++) {
+        const boundary = boundaries[i];
+        if (
+          isColliding({
+            rectangle1: player,
+            rectangle2: {
+              ...boundary,
+              position: {
+                x: boundary.position.x,
+                y: boundary.position.y + 10,
+              },
             },
-          },
-        })
-      ) {
-        player.moving = false;
-        moving = false;
+          })
+        ) {
+          player.moving = false;
+          moving = false;
+          break;
+        }
       }
       if (moving)
         for (const movable of movables) {
@@ -85,20 +89,24 @@ export default class InputHandler {
     }
     if (this.inputs.q.pressed && this.lastKey === "q") {
       player.moving = true;
-      if (
-        isColliding({
-          rectangle1: player,
-          rectangle2: {
-            ...testBoundary,
-            position: {
-              x: testBoundary.position.x + 10,
-              y: testBoundary.position.y,
+      for (let i = 0; i < boundaries.length; i++) {
+        const boundary = boundaries[i];
+        if (
+          isColliding({
+            rectangle1: player,
+            rectangle2: {
+              ...boundary,
+              position: {
+                x: boundary.position.x + 10,
+                y: boundary.position.y,
+              },
             },
-          },
-        })
-      ) {
-        player.moving = false;
-        moving = false;
+          })
+        ) {
+          player.moving = false;
+          moving = false;
+          break;
+        }
       }
       if (moving)
         for (const movable of movables) {
@@ -107,20 +115,24 @@ export default class InputHandler {
     }
     if (this.inputs.s.pressed && this.lastKey === "s") {
       player.moving = true;
-      if (
-        isColliding({
-          rectangle1: player,
-          rectangle2: {
-            ...testBoundary,
-            position: {
-              x: testBoundary.position.x,
-              y: testBoundary.position.y - 10,
+      for (let i = 0; i < boundaries.length; i++) {
+        const boundary = boundaries[i];
+        if (
+          isColliding({
+            rectangle1: player,
+            rectangle2: {
+              ...boundary,
+              position: {
+                x: boundary.position.x,
+                y: boundary.position.y - 10,
+              },
             },
-          },
-        })
-      ) {
-        player.moving = false;
-        moving = false;
+          })
+        ) {
+          player.moving = false;
+          moving = false;
+          break;
+        }
       }
       if (moving)
         for (const movable of movables) {
@@ -129,20 +141,24 @@ export default class InputHandler {
     }
     if (this.inputs.d.pressed && this.lastKey === "d") {
       player.moving = true;
-      if (
-        isColliding({
-          rectangle1: player,
-          rectangle2: {
-            ...testBoundary,
-            position: {
-              x: testBoundary.position.x - speed,
-              y: testBoundary.position.y,
+      for (let i = 0; i < boundaries.length; i++) {
+        const boundary = boundaries[i];
+        if (
+          isColliding({
+            rectangle1: player,
+            rectangle2: {
+              ...boundary,
+              position: {
+                x: boundary.position.x - speed,
+                y: boundary.position.y,
+              },
             },
-          },
-        })
-      ) {
-        player.moving = false;
-        moving = false;
+          })
+        ) {
+          player.moving = false;
+          moving = false;
+          break;
+        }
       }
       if (moving)
         for (const movable of movables) {

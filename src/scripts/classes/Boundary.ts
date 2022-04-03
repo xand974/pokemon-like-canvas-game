@@ -11,7 +11,7 @@ export default class Boundary {
     this.position = position;
   }
   draw() {
-    ctx.fillStyle = "rgba(255, 0 ,0, 0.9)";
+    ctx.fillStyle = "rgba(255, 0 ,0, 0.5)";
     ctx.fillRect(
       this.position.x,
       this.position.y,

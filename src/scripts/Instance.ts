@@ -26,6 +26,6 @@ const boundaries: Boundary[] = toBoundaryArray(collisionsArray, 1025);
 const testBoundary = new Boundary({
   position: { x: offset.x, y: offset.y - 100 },
 });
-const movables = [board, testBoundary];
+const movables = [board, ...boundaries];
 
-export { movables, player, testBoundary, inputHandler };
+export { movables, player, inputHandler, boundaries };
