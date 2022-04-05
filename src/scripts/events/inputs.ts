@@ -4,6 +4,7 @@ import { isColliding } from "../../utils/collision";
 // TODO Faudra Refactor
 export default class InputHandler {
   public lastKey: string;
+  public keys: string[];
   public inputs = {
     z: {
       pressed: false,
@@ -19,15 +20,30 @@ export default class InputHandler {
     },
   };
   constructor() {
+    this.keys = [];
     this.lastKey = "";
     window.addEventListener("keydown", this.movePlayer.bind(this));
 
     window.addEventListener("keyup", (e) => {
+      // TODO handle over keys
+      if (
+        (e.key === "z" || e.key === "s" || e.key === "q" || e.key === "d") &&
+        this.keys.indexOf(e.key) === -1
+      ) {
+        this.keys.splice(this.keys.indexOf(e.key), 1);
+      }
       player.moving = false;
       this.stopPlayer(e);
     });
   }
   movePlayer(e: KeyboardEvent) {
+    //push keys in keys array
+    if (
+      (e.key === "z" || e.key === "s" || e.key === "q" || e.key === "d") &&
+      this.keys.indexOf(e.key) === -1
+    ) {
+      this.keys.push(e.key);
+    }
     this.setInputs(e);
     this.setMoving();
     this.stopPlayer(e);
