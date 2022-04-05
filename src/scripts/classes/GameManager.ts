@@ -21,7 +21,6 @@ export default class GameManager {
     for (const movable of movables) {
       movable.draw();
     }
-
     player.draw();
     if (inputHandler.lastKey === "p") {
       cancelAnimationFrame(id);

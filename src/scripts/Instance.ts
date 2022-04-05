@@ -30,7 +30,7 @@ const collisionsArray: number[][] = toMultiDimensionArray(
 const foreground = new Sprite({ ...foregroundInfos });
 const boundaries: Boundary[] = toBoundaryArray(collisionsArray, 1025);
 
-const movables = [board, ...boundaries, foreground];
+const movables = [board, foreground, ...boundaries];
 
 const combatSprite = new Sprite({ ...combatInfos });
 const deck = document.querySelector("#deck") as HTMLDivElement;
