@@ -25,6 +25,6 @@ const collisionsArray: number[][] = toMultiDimensionArray(
 const foreground = new Sprite({ ...foregroundInfos });
 const boundaries: Boundary[] = toBoundaryArray(collisionsArray, 1025);
 
-const movables = [board, ...boundaries, foreground];
+const movables = [board, foreground, ...boundaries];
 
 export { movables, player, inputHandler, boundaries };

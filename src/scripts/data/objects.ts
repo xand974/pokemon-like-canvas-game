@@ -26,7 +26,7 @@ export const boardInfos = {
   },
 };
 export const foregroundInfos = {
-  src: "../assets/images/Foreground.png",
+  src: "../../assets/images/Foreground.png",
   position: {
     ...offsetMap,
   },

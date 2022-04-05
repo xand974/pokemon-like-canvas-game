@@ -12,7 +12,6 @@ export default class GameManager {
     for (const movable of movables) {
       movable.draw();
     }
-
     player.draw();
   }
 }
