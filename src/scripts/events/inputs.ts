@@ -1,4 +1,4 @@
-import { boundaries, movables, player } from "../Instance";
+import { collisionBoundaries, movables, player } from "../Instance";
 import { isColliding } from "../../utils/collision";
 
 // TODO Faudra Refactor
@@ -71,8 +71,8 @@ export default class InputHandler {
     player.moving = false;
     if (this.inputs.z.pressed && this.lastKey === "z") {
       player.moving = true;
-      for (let i = 0; i < boundaries.length; i++) {
-        const boundary = boundaries[i];
+      for (let i = 0; i < collisionBoundaries.length; i++) {
+        const boundary = collisionBoundaries[i];
         if (
           isColliding({
             rectangle1: player,
@@ -97,8 +97,8 @@ export default class InputHandler {
     }
     if (this.inputs.q.pressed && this.lastKey === "q") {
       player.moving = true;
-      for (let i = 0; i < boundaries.length; i++) {
-        const boundary = boundaries[i];
+      for (let i = 0; i < collisionBoundaries.length; i++) {
+        const boundary = collisionBoundaries[i];
         if (
           isColliding({
             rectangle1: player,
@@ -123,8 +123,8 @@ export default class InputHandler {
     }
     if (this.inputs.s.pressed && this.lastKey === "s") {
       player.moving = true;
-      for (let i = 0; i < boundaries.length; i++) {
-        const boundary = boundaries[i];
+      for (let i = 0; i < collisionBoundaries.length; i++) {
+        const boundary = collisionBoundaries[i];
         if (
           isColliding({
             rectangle1: player,
@@ -149,8 +149,8 @@ export default class InputHandler {
     }
     if (this.inputs.d.pressed && this.lastKey === "d") {
       player.moving = true;
-      for (let i = 0; i < boundaries.length; i++) {
-        const boundary = boundaries[i];
+      for (let i = 0; i < collisionBoundaries.length; i++) {
+        const boundary = collisionBoundaries[i];
         if (
           isColliding({
             rectangle1: player,
